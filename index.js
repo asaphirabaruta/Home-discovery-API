@@ -28,6 +28,18 @@ app.get("/api/users", async (req, res)=>{
    
 })
 
+app.get("/api/user/:id", async (req, res)=>{
+
+    
+    try {
+        const user = await pool.query("SELECT * FROM users WHERE user_id = $1", [req.params.id]);
+        res.json(user.rows);
+    } catch (error) {
+        console.error(error);
+    }
+   
+})
+
 app.post("/api/users", async (req, res)=>{
     
     try {
